@@ -1,4 +1,4 @@
-PBL2 - QUAN LY DANH BA DIEN THOAI CO DINH
+# PBL2 - Landline Phonebook Management
 
 Cau truc:
 - ThueBaoCoDinh.h/.cpp: lop thue bao co dinh.
