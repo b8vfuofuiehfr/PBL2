@@ -1,0 +1,6 @@
+VNPT Can Tho|2 Hoa Binh, Ninh Kieu|3822222
+Nguyen Quoc Bao|45 Mau Than, Ninh Kieu|3766100
+Cong ty Mekong|80 Nguyen Van Cu, Ninh Kieu|3899000
+Tran Minh Chau|16 Le Hong Phong, Binh Thuy|3822222
+Pham Thi Dung|32 Cach Mang Thang Tam, Binh Thuy|3888111
+Cong ty Tay Do|90 Duong 30 Thang 4, Ninh Kieu|3755000
