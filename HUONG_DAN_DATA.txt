@@ -1,0 +1,8 @@
+BO DU LIEU MAU PBL2 - DANH BA DIEN THOAI CO DINH
+Cac so trung:
+- DaNang.txt: 3823456
+- HaNoi.txt: 3945678
+- TPHCM.txt: 3912345
+- CanTho.txt: 3822222
+
+Luu y: So dien thoai khong bao gom ma vung.
