@@ -1,6 +1,5 @@
 #include "ThanhPho.h"
 #include "ThueBaoCoDinh.h"
-
 #include <fstream>
 #include <iostream>
 #include <limits>
@@ -8,145 +7,122 @@
 
 using namespace std;
 
-ThanhPho::~ThanhPho(){}
-
 ThanhPho::ThanhPho(string ten) 
 {
     tenTinh = ten;
-    if (tenTinh.empty()){
-        cout << "Khong the khoi tao ThanhPho voi ten rong!\n";
+    docFile();   
+}
+
+ThanhPho::~ThanhPho()
+{
+    for (size_t i = 0; i < dsThueBao.size(); i++)  delete dsThueBao[i];
+    dsThueBao.clear();
+}
+
+string ThanhPho::getTenTinh() const{ return tenTinh; }
+
+string ThanhPho::getFileName() const{  return "data/" + tenTinh + ".dat"; }
+
+void ThanhPho::docFile()
+{
+    ifstream in("data/" + tenTinh + ".dat");
+    if (!in) return;
+
+    string line;
+    while (getline(in, line)){
+        ThueBaoCoDinh* tb = ThueBaoCoDinh::chinhsuadata(line);
+        if (tb != nullptr) dsThueBao.push_back(tb);
     }
+    in.close();
+    
 }
 
-string ThanhPho::TenTinh() 
+void ThanhPho::ghiFile()
 {
-    return tenTinh;
-}
-
-string ThanhPho::TenFile() 
-{
-    return "data/" + tenTinh + ".dat";
+    ofstream out("data/" + tenTinh + ".dat");
+    if (!out) return;
+    for (size_t i = 0; i < dsThueBao.size(); i++) out << dsThueBao[i]->taochuoi() << endl;
+    out.close();
 }
 
 bool ThanhPho::kiemTraTrungSDT(string sdt) 
 {
-    ifstream in(TenFile());
-    string line;
-
-    while (getline(in, line)){
-        if (line.empty()){
-            continue;
+    bool flag = false;
+    for (size_t i = 0; i < dsThueBao.size(); i++)
+        if (dsThueBao[i]->getSoDienThoai() == sdt){
+            flag = true;
+            break;
         }
-
-        ThueBaoCoDinh tb = ThueBaoCoDinh::chinhsuadata(line);
-        if (tb.getSoDienThoai() == sdt){
-            return true;
-        }
-    }
-
-    return false;
+    if (flag) cout << "So dien thoai da ton tai trong danh ba!\n";
+    return flag;
 }
 
 void ThanhPho::themThueBao() 
 {
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    int loai;
+    cout << "\n+--- CHON LOAI THUE BAO CAN THEM ---+" << endl;
+    cout << "| 1. Thue bao Ca nhan               |" << endl;
+    cout << "| 2. Thue bao Doanh nghiep          |" << endl;
+    cout << "+-----------------------------------+" << endl;
+    cout << " >> Nhap lua chon (1 hoac 2): ";
+    if(!(cin >> loai)){
+        cout << "Loi Nhap du lieu, huy thao tac!\n";
+        cin.clear();
+        cin.ignore(10000, '\n');
+        return;
+    }
+    
+    cin.ignore(10000, '\n');
 
-    ThueBaoCoDinh tb;
-    tb.nhap();
+    string ten, diaChi, sdt, thongTinRieng;
 
-    if (kiemTraTrungSDT(tb.getSoDienThoai())){
-        cout << "\nSO DIEN THOAI DA TON TAI TRONG TINH NAY!\n";
+    cout << "- Nhap ten (Nguoi/Doanh Nghiep):";
+    getline(cin, ten);
+    if (loai == 1){
+        cout << "- Nhap CCCD: ";
+        getline(cin, thongTinRieng);
+    }
+    else if (loai == 2){
+        cout <<"-Nhap Ma so thue:";
+        getline(cin, thongTinRieng);
+    }
+    else {
+        cout << "Lua chon khong hop le!\n";
         return;
     }
 
-    ofstream out(TenFile(), ios::app);
-    if (!out){
-        cout << "Khong the mo file de ghi!\n";
-        return;
-    }
+    cout <<"-Nhap dia chi:";
+    getline(cin, diaChi);
+    
+    cout <<"-Nhap so dien thoai:";
+    getline(cin, sdt);
 
-    out << tb.taochuoi() << endl;
-    cout << "\nThem thanh cong!\n";
+    ThueBaoCoDinh* tb = nullptr;
+    if (loai == 1) tb = new ThueBaoCaNhan(ten, thongTinRieng, diaChi, sdt);
+    else tb = new ThueBaoDoanhNghiep(ten, thongTinRieng, diaChi, sdt);
+    dsThueBao.push_back(tb);
+    ghiFile();
+
+    cout << "Them thue bao thanh cong!\n";
 }
 
 void ThanhPho::lietKeDanhBa() 
 {
-    ifstream in(TenFile());
-    if (!in){
-        cout << "Khong ton tai file du lieu!\n";
-        return;
-    }
-
-    string line;
-    cout << "\n===== DANH BA " << tenTinh << " =====\n";
-
-    while (getline(in, line)){
-        if (line.empty()){
-            continue;
-        }
-
-        ThueBaoCoDinh tb = ThueBaoCoDinh::chinhsuadata(line);
-        tb.xuat();
-    }
+    cout << "\n--- Danh sach thue bao tai " << tenTinh << " ---\n";
+    for (size_t i = 0; i < dsThueBao.size(); i++) dsThueBao[i]->xuat(); 
 }
 
-int ThanhPho::demSoLuongThueBao() 
-{
-    ifstream in(TenFile());
-    string line;
-    int dem = 0;
+int ThanhPho::demSoLuongThueBao(){  return dsThueBao.size();   }
 
-    while (getline(in, line))
-        if (!line.empty()) dem++;
-        
-    return dem;
-}
-
-void ThanhPho::xoaSoTrung() 
-{
-    ifstream in(TenFile());
-    if (!in) {
-        cout << "Khong tim thay file!\n";
-        return;
-    }
-
-    vector<ThueBaoCoDinh> ds;
-    string line;
-
-    while (getline(in, line)){
-        if (!line.empty()){
-            ds.push_back(ThueBaoCoDinh::chinhsuadata(line));
-        }
-    }
-    in.close();
-
-    bool trung = false;
-
-    for (size_t i = 0; i < ds.size(); i++)
-        for (size_t j = i + 1; j < ds.size();){
-            if (ds[i].getSoDienThoai() == ds[j].getSoDienThoai()){
-                cout << "Phat hien trung so: "
-                     << ds[j].getSoDienThoai() << endl;
-                ds.erase(ds.begin() + j);
-                trung = true;
-            } 
+void ThanhPho::xoaSoTrung() {
+    for (size_t i = 0; i < dsThueBao.size(); i++) 
+        for (size_t j = i + 1; j < dsThueBao.size(); ){ 
+            
+            if (dsThueBao[i]->getSoDienThoai() == dsThueBao[j]->getSoDienThoai()){
+                delete dsThueBao[j];
+                dsThueBao.erase(dsThueBao.begin() + j);
+            }
             else j++; 
         }
-
-    ofstream out(TenFile());
-    if (!out){
-        cout << "Khong the mo file de cap nhat!\n";
-        return;
-    }
-
-    for (auto &x : ds){
-        out << x.taochuoi() << endl;
-    }
-
-    if (trung){
-        cout << "Da xoa cac ban ghi trung.\n";
-    } 
-    else{
-        cout << "Khong co so trung.\n";
-    }
+    ghiFile(); 
 }

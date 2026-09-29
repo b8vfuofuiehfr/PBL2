@@ -1,5 +1,10 @@
 BO DU LIEU MAU PBL2 - DANH BA DIEN THOAI CO DINH
-Cac so trung:
+
+Dinh dang moi dong:
+Ten don vi hoac chu thue bao|Dia chi|So dien thoai
+
+Moi tinh/thanh pho duoc luu trong mot file rieng.
+Cac so trung co chu y de kiem thu:
 - DaNang.txt: 3823456
 - HaNoi.txt: 3945678
 - TPHCM.txt: 3912345

@@ -2,4 +2,3 @@ CanTho
 DaNang
 HaNoi
 TPHCM
-SocTrang

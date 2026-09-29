@@ -1,58 +1,57 @@
 #include "ThueBaoCoDinh.h"
 #include <iostream>
-#include <sstream>
+#include <sstream> 
 
 using namespace std;
 
-ThueBaoCoDinh::~ThueBaoCoDinh(){}
+ThueBaoCoDinh::ThueBaoCoDinh() {}
 
-ThueBaoCoDinh::ThueBaoCoDinh(){}
+ThueBaoCoDinh::ThueBaoCoDinh(string ten, string dc, string sdt) 
+    : tenDonVi(ten), diaChi(dc), soDienThoai(sdt) {}
 
-ThueBaoCoDinh::ThueBaoCoDinh(string ten, string dc, string sdt)
+ThueBaoCoDinh::~ThueBaoCoDinh() {}
+
+void ThueBaoCoDinh::xuat() const {  cout << "Ten: " << tenDonVi << " | Dia chi: " << diaChi << " | SDT: " << soDienThoai; }
+
+string ThueBaoCoDinh::getSoDienThoai() const { return soDienThoai; }
+
+ThueBaoCaNhan::ThueBaoCaNhan(string ten, string cc, string dc, string sdt) 
+    : ThueBaoCoDinh(ten, dc, sdt), cccd(cc) {}
+
+void ThueBaoCaNhan::xuat() const 
 {
-    tenDonVi = ten;
-    diaChi = dc;
-    soDienThoai = sdt;
+    cout << "[Ca Nhan] ";
+    ThueBaoCoDinh::xuat();
+    cout << " | CCCD: " << cccd << endl;
 }
 
-void ThueBaoCoDinh::nhap()
+string ThueBaoCaNhan::taochuoi() const { return "1|" + tenDonVi + "|" + cccd + "|" + diaChi + "|" + soDienThoai; }
+
+ThueBaoDoanhNghiep::ThueBaoDoanhNghiep(string ten, string mst, string dc, string sdt) 
+    : ThueBaoCoDinh(ten, dc, sdt), maSoThue(mst) {}
+
+void ThueBaoDoanhNghiep::xuat() const 
 {
-    cout << "Ten don vi/chu thue bao: ";
-    getline(cin, tenDonVi);
-
-    cout << "Dia chi: ";
-    getline(cin, diaChi);
-
-    cout << "So dien thoai: ";
-    getline(cin, soDienThoai);
+    cout << "[Doanh Nghiep] ";
+    ThueBaoCoDinh::xuat();
+    cout << " | MST: " << maSoThue << endl;
 }
 
-void ThueBaoCoDinh::xuat() 
-{
-    cout << "Ten don vi : " << tenDonVi << endl;
-    cout << "Dia chi    : " << diaChi << endl;
-    cout << "So DT      : " << soDienThoai << endl;
-    cout << "-----------------------------\n";
-}
+string ThueBaoDoanhNghiep::taochuoi() const { return "2|" + tenDonVi + "|" + maSoThue + "|" + diaChi + "|" + soDienThoai; }
 
-string ThueBaoCoDinh::getSoDienThoai() const 
+ThueBaoCoDinh* ThueBaoCoDinh::chinhsuadata(string line) 
 {
-    return soDienThoai;
-}
-
-string ThueBaoCoDinh::taochuoi() const 
-{
-    return tenDonVi + "|" + diaChi + "|" + soDienThoai;
-}
-
-ThueBaoCoDinh ThueBaoCoDinh::chinhsuadata(string line) 
-{
-    string ten, dc, sdt;
     stringstream ss(line);
+    string flag, ten, thongTinRieng, diaChi, sdt;
 
-    getline(ss, ten, '|');
-    getline(ss, dc, '|');
-    getline(ss, sdt, '|');
+    getline(ss, flag, '|');           
+    getline(ss, ten, '|');            
+    getline(ss, thongTinRieng, '|');  
+    getline(ss, diaChi, '|');         
+    getline(ss, sdt, '|');            
 
-    return ThueBaoCoDinh(ten, dc, sdt);
+    if (flag == "1") return new ThueBaoCaNhan(ten, thongTinRieng, diaChi, sdt);
+    else if (flag == "2") return new ThueBaoDoanhNghiep(ten, thongTinRieng, diaChi, sdt);
+
+    return nullptr; 
 }

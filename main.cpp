@@ -1,17 +1,17 @@
 #include "QuanLyDanhBa.h"
 #include <iostream>
 #include <limits>
-#include <cstdlib>
+#include <cstdlib> 
 
 using namespace std;
 
-int main() 
-{
+int main() {
     QuanLyDanhBa ql;
     int chon;
-    string tinh; 
 
-    do{
+    do {
+        system("cls"); 
+        
         cout << "\n===================================\n";
         cout << " QUAN LY DANH BA DIEN THOAI CO DINH\n";
         cout << "===================================\n";
@@ -23,60 +23,59 @@ int main()
         cout << "0. Thoat\n";
         cout << "Lua chon: ";
 
-        if (!(cin >> chon)){
+        if (!(cin >> chon)) {
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Vui long nhap mot so!\n";
-            cout << "\nNhan enter de quay lai menu...";
-            cin.get();
-            system("cls");
+            cin.ignore(10000, '\n');
+            cout << " [!] Vui long nhap mot so!\n";
+            system("pause"); 
             continue;
         }
 
-        switch (chon){
+        switch (chon) {
         case 1:
-            cout << "Nhap tinh thanh (khong dung khoang trang): "; 
-            cin >> tinh;
-            system("cls"); 
-            ql.themThueBao(tinh); 
+            system("cls");
+            ql.themThueBao();
+            cout << endl;
+            system("pause"); 
             break;
+            
         case 2:
-            cout << "Nhap tinh can xem: "; 
-            cin >> tinh;
-            system("cls"); 
-            ql.lietKeTheoTinh(tinh); 
+            system("cls");
+            ql.lietKeTheoTinh();
+            cout << endl;
+            system("pause"); 
             break;
+            
         case 3:
             system("cls");
             ql.thongKeTheoTinh();
+            cout << endl;
+            system("pause"); 
             break;
+            
         case 4:
             system("cls");
             ql.hienThiTinh();
+            cout << endl;
+            system("pause");
             break;
+            
         case 5:
-            cout << "Nhap tinh can kiem tra: ";
-            cin >> tinh;
             system("cls");
-            ql.kiemTraXoaTrung(tinh); 
+            ql.kiemTraXoaTrung();
+            cout << endl;
+            system("pause");
             break;
+            
         case 0:
-            cout << "Ket thuc chuong trinh!\n";
+            system("cls");
+            cout << "\n Ket thuc chuong trinh. Chuc ban bao ve PBL2 thanh cong!\n\n";
             break;
+            
         default:
-            cout << "Lua chon khong hop le!\n";
+            cout << " [!] Lua chon khong hop le!\n";
+            system("pause");
         }
-
-        if (chon != 0){
-            cout << "\nNhan enter de quay lai menu...";
-            cin.clear();
-            if (chon != 1) { 
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            }
-            cin.get(); 
-            system("cls"); 
-        }
-
     } while (chon != 0);
 
     return 0;

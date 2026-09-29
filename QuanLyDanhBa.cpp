@@ -5,56 +5,53 @@
 
 using namespace std;
 
-QuanLyDanhBa::~QuanLyDanhBa(){}
-
 QuanLyDanhBa::QuanLyDanhBa()
 {
-    ifstream file("DanhSachTinh.dat");
-
-    if (!file){
-        cout << "Khong mo duoc file DanhSachTinh.dat!\n";
-        return;
-    }
-
+    ifstream file("data/0_DanhSachTinh.dat");
+    if (!file) return;
+    
     dsTinh.clear();
-
     string tenTinh;
 
-    while (getline(file, tenTinh)){
-        if (!tenTinh.empty()) 
-            dsTinh.push_back(tenTinh);
-    }
-
+    while (getline(file, tenTinh))
+        if (!tenTinh.empty()) dsTinh.push_back(tenTinh);
     file.close();
 }
 
-void QuanLyDanhBa::themTinh(string tinh) 
-{
+QuanLyDanhBa::~QuanLyDanhBa(){}
+
+
+void QuanLyDanhBa::themTinh(string tinh) {
     for (string x : dsTinh) 
-        if (x == tinh){
-            cout << tinh << "da ton tai trong danh sach!\n" << endl;
-            return;
-        }
-    
+        if (x == tinh)  return;
 
     dsTinh.push_back(tinh);
 
-    ofstream fileMucLuc("DanhSachTinh.dat", ios::app); 
-    if (fileMucLuc) {
+    ofstream fileMucLuc("data/.0_DanhSachTinh.dat", ios::app);
+    if (fileMucLuc){
         fileMucLuc << tinh << endl;
         fileMucLuc.close();
     }
 }
 
-void QuanLyDanhBa::themThueBao(string tinh) 
+void QuanLyDanhBa::themThueBao() 
 {
+    string tinh;
+    cout << "Nhap tinh thanh (khong dung khoang trang): ";
+    cin >> tinh;
+
     themTinh(tinh);
+
     ThanhPho tp(tinh);
     tp.themThueBao();
 }
 
-void QuanLyDanhBa::lietKeTheoTinh(string tinh) 
+void QuanLyDanhBa::lietKeTheoTinh() 
 {
+    string tinh;
+    cout << "Nhap tinh can xem: ";
+    cin >> tinh;
+
     ThanhPho tp(tinh);
     tp.lietKeDanhBa();
 }
@@ -63,14 +60,16 @@ void QuanLyDanhBa::thongKeTheoTinh()
 {
     cout << "\n===== THONG KE =====\n";
 
-    if (dsTinh.empty()){
+    if (dsTinh.empty()) {
         cout << "Chua co du lieu!\n";
         return;
     }
 
-    for (string tinh : dsTinh){
+    for (string tinh : dsTinh) {
         ThanhPho tp(tinh);
-        cout << tinh << " : " << tp.demSoLuongThueBao() << " thue bao" << endl;
+        cout << tinh << " : "
+             << tp.demSoLuongThueBao()
+             << " thue bao" << endl;
     }
 }
 
@@ -78,18 +77,22 @@ void QuanLyDanhBa::hienThiTinh()
 {
     cout << "\n===== CAC TINH DANG QUAN LY =====\n";
 
-    if (dsTinh.empty()){
+    if (dsTinh.empty()) {
         cout << "Danh sach rong!\n";
         return;
     }
 
-    for (string tinh : dsTinh) cout << tinh << endl;
-    
+    for (string tinh : dsTinh) {
+        cout << tinh << endl;
+    }
 }
 
-void QuanLyDanhBa::kiemTraXoaTrung(string tinh) 
+void QuanLyDanhBa::kiemTraXoaTrung() 
 {
+    string tinh;
+    cout << "Nhap tinh can kiem tra: ";
+    cin >> tinh;
+
     ThanhPho tp(tinh);
     tp.xoaSoTrung();
 }
-
