@@ -4,7 +4,7 @@ Dự án Lập trình Hướng đối tượng (OOP) bằng ngôn ngữ C++, t�
 
 ## 🎓 Thông tin sinh viên
 * **Sinh viên thực hiện:** Nguyễn Quốc Thịnh, Phan Huỳnh Khánh Bảo
-* **Lớp:** 25T-DT3, 25T-
+* **Lớp:** 25T-DT3, 25T-DT2
 * **Trường:** Đại học Bách khoa – Đại học Đà Nẵng
 
 ---
