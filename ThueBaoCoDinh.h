@@ -6,40 +6,43 @@
 
 using namespace std;
 
-class ThueBaoCoDinh {
+class ThueBaoCoDinh 
+{
 protected: 
     string tenDonVi;
     string diaChi;
-    string soDienThoai;
+    string soDuoi; // Thay the soDienThoai cu bang soDuoi
 
 public:
     ThueBaoCoDinh(); 
-    ThueBaoCoDinh(string ten, string dc, string sdt);
-    
+    ThueBaoCoDinh(string ten, string dc, string sd);
     virtual ~ThueBaoCoDinh(); 
 
-    virtual void xuat() const; 
+    // Cho phep truyen maVung tu ThanhPho vao de hien thi so hoan chinh
+    virtual void xuat(string maVung = "") const; 
     virtual string taochuoi() const = 0; 
-    string getSoDienThoai() const; 
+    string getSoDuoi() const; 
 
     static ThueBaoCoDinh* chinhsuadata(string line);
 };
 
-class ThueBaoCaNhan : public ThueBaoCoDinh {
+class ThueBaoCaNhan : public ThueBaoCoDinh 
+{
 private:
     string cccd; 
 public:
-    ThueBaoCaNhan(string ten, string cc, string dc, string sdt);
-    void xuat() const override;
+    ThueBaoCaNhan(string ten, string cc, string dc, string sd);
+    void xuat(string maVung = "") const override;
     string taochuoi() const override;
 };
 
-class ThueBaoDoanhNghiep : public ThueBaoCoDinh {
+class ThueBaoDoanhNghiep : public ThueBaoCoDinh 
+{
 private:
     string maSoThue; 
 public:
-    ThueBaoDoanhNghiep(string ten, string mst, string dc, string sdt);
-    void xuat() const override;
+    ThueBaoDoanhNghiep(string ten, string mst, string dc, string sd);
+    void xuat(string maVung = "") const override;
     string taochuoi() const override;
 };
 

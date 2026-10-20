@@ -19,9 +19,13 @@ int main() {
         cout << "2. Liet ke danh ba theo Tinh/Thanh Pho\n";
         cout << "3. Thong ke so luong thue bao theo Tinh/Thanh Pho\n";
         cout << "4. Hien thi cac tinh dang quan ly\n";
-        cout << "5. Tim va xoa so dien thoai trung\n";
+        cout << "5. Kiem tra ton tai so dien thoai\n";
+        cout << "6. Xoa so dien thoai\n";
+        cout << "7. Xoa Tinh/Thanh Pho\n";
+        cout << "8. Tim va xoa so dien thoai trung\n";
         cout << "0. Thoat\n";
-        cout << "Lua chon: ";
+        cout << "-----------------------------------\n";
+        cout << "Lua chon cua ban: ";
 
         if (!(cin >> chon)) {
             cin.clear();
@@ -61,6 +65,27 @@ int main() {
             break;
             
         case 5:
+            system("cls");
+            ql.kiemTraTonTaiSDT();
+            cout << endl;
+            system("pause");
+            break;
+
+        case 6:
+            system("cls");
+            ql.xoaThueBao();
+            cout << endl;
+            system("pause");
+            break;
+
+        case 7:
+            system("cls");
+            ql.xoaTinh();
+            cout << endl;
+            system("pause");
+            break;
+
+        case 8:
             system("cls");
             ql.kiemTraXoaTrung();
             cout << endl;
