@@ -23,7 +23,7 @@ string ThueBaoCoDinh::getSoDuoi() const {
     return soDuoi; 
 }
 
-// ===== THUE BAO CA NHAN =====
+
 ThueBaoCaNhan::ThueBaoCaNhan(string ten, string cc, string dc, string sd) 
     : ThueBaoCoDinh(ten, dc, sd), cccd(cc) {}
 
@@ -38,7 +38,7 @@ string ThueBaoCaNhan::taochuoi() const {
     return "1|" + tenDonVi + "|" + cccd + "|" + diaChi + "|" + soDuoi; 
 }
 
-// ===== THUE BAO DOANH NGHIEP =====
+
 ThueBaoDoanhNghiep::ThueBaoDoanhNghiep(string ten, string mst, string dc, string sd) 
     : ThueBaoCoDinh(ten, dc, sd), maSoThue(mst) {}
 
@@ -53,7 +53,6 @@ string ThueBaoDoanhNghiep::taochuoi() const {
     return "2|" + tenDonVi + "|" + maSoThue + "|" + diaChi + "|" + soDuoi; 
 }
 
-// ===== PHAN TICH DU LIEU TU FILE =====
 ThueBaoCoDinh* ThueBaoCoDinh::chinhsuadata(string line) 
 {
     stringstream ss(line);

@@ -11,14 +11,13 @@ class ThueBaoCoDinh
 protected: 
     string tenDonVi;
     string diaChi;
-    string soDuoi; // Thay the soDienThoai cu bang soDuoi
+    string soDuoi; 
 
 public:
     ThueBaoCoDinh(); 
     ThueBaoCoDinh(string ten, string dc, string sd);
     virtual ~ThueBaoCoDinh(); 
 
-    // Cho phep truyen maVung tu ThanhPho vao de hien thi so hoan chinh
     virtual void xuat(string maVung = "") const; 
     virtual string taochuoi() const = 0; 
     string getSoDuoi() const; 

@@ -25,7 +25,7 @@ void QuanLyDanhBa::capNhatFileDanhSachTinh()
 {
     ofstream file("data/0_DanhSachTinh.dat");
     if (!file) return;
-    for (size_t i = 0; i < dsTinh.size(); i++) {
+    for (size_t i = 0; i < dsTinh.size(); i++){
         file << dsTinh[i] << endl;
     }
     file.close();
@@ -71,12 +71,12 @@ void QuanLyDanhBa::thongKeTheoTinh()
 {
     cout << "\n===== THONG KE =====\n";
 
-    if (dsTinh.empty()) {
+    if (dsTinh.empty()){
         cout << "Chua co du lieu!\n";
         return;
     }
 
-    for (string tinh : dsTinh) {
+    for (string tinh : dsTinh){
         ThanhPho tp(tinh);
         cout << tinh << " (Ma vung: " << tp.getMaVung() << ") : "
              << tp.demSoLuongThueBao()
@@ -88,12 +88,12 @@ void QuanLyDanhBa::hienThiTinh()
 {
     cout << "\n===== CAC TINH DANG QUAN LY =====\n";
 
-    if (dsTinh.empty()) {
+    if (dsTinh.empty()){
         cout << "Danh sach rong!\n";
         return;
     }
 
-    for (string tinh : dsTinh) {
+    for (string tinh : dsTinh){
         ThanhPho tp(tinh);
         cout << "- " << tinh << " [Ma vung: " << tp.getMaVung() << "]\n";
     }
@@ -141,11 +141,11 @@ void QuanLyDanhBa::xoaThueBao()
     cin >> tinh;
 
     bool tonTaiTinh = false;
-    for (string x : dsTinh) {
-        if (x == tinh) { tonTaiTinh = true; break; }
+    for (string x : dsTinh){
+        if (x == tinh) {tonTaiTinh = true; break;}
     }
 
-    if (!tonTaiTinh) {
+    if (!tonTaiTinh){
         cout << "[-] Tinh " << tinh << " khong ton tai!\n";
         return;
     }
@@ -165,14 +165,14 @@ void QuanLyDanhBa::xoaTinh()
     cin >> tinh;
 
     int viTri = -1;
-    for (size_t i = 0; i < dsTinh.size(); i++) {
+    for (size_t i = 0; i < dsTinh.size(); i++){
         if (dsTinh[i] == tinh) {
             viTri = i;
             break;
         }
     }
 
-    if (viTri == -1) {
+    if (viTri == -1){
         cout << "[-] Tinh " << tinh << " khong co trong danh sach quan ly!\n";
         return;
     }
@@ -181,18 +181,15 @@ void QuanLyDanhBa::xoaTinh()
     char xacNhan;
     cin >> xacNhan;
 
-    if (xacNhan != 'y' && xacNhan != 'Y') {
+    if (xacNhan != 'y' && xacNhan != 'Y'){
         cout << "Da huy thao tac xoa tinh!\n";
         return;
     }
 
-    // 1. Xoa khoi vector dsTinh
     dsTinh.erase(dsTinh.begin() + viTri);
 
-    // 2. Cap nhat lai file 0_DanhSachTinh.dat
     capNhatFileDanhSachTinh();
 
-    // 3. Xoa file vat ly data/<tinh>.dat
     string duongDan = "data/" + tinh + ".dat";
     remove(duongDan.c_str());
 

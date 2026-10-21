@@ -9,5 +9,6 @@ Cac so trung co chu y de kiem thu:
 - HaNoi.txt: 3945678
 - TPHCM.txt: 3912345
 - CanTho.txt: 3822222
+g++ -std=c++11 main.cpp QuanLyDanhBa.cpp ThanhPho.cpp ThueBaoCoDinh.cpp -o PBL2
 
 Luu y: So dien thoai khong bao gom ma vung.
