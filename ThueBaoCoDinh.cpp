@@ -6,12 +6,12 @@ using namespace std;
 
 ThueBaoCoDinh::ThueBaoCoDinh() {}
 
-ThueBaoCoDinh::ThueBaoCoDinh(string ten, string dc, string sd) 
+ThueBaoCoDinh::ThueBaoCoDinh(const string& ten, const string& dc, const string& sd) 
     : tenDonVi(ten), diaChi(dc), soDuoi(sd) {}
 
 ThueBaoCoDinh::~ThueBaoCoDinh() {}
 
-void ThueBaoCoDinh::xuat(string maVung) const {  
+void ThueBaoCoDinh::xuat(const string& maVung) const {  
     cout << "Ten: " << tenDonVi << " | Dia chi: " << diaChi << " | SDT: ";
     if (!maVung.empty()) {
         cout << "(" << maVung << ") ";
@@ -19,41 +19,39 @@ void ThueBaoCoDinh::xuat(string maVung) const {
     cout << soDuoi;
 }
 
-string ThueBaoCoDinh::getSoDuoi() const { 
-    return soDuoi; 
-}
+const string& ThueBaoCoDinh::getSoDuoi() const{ return soDuoi; }
 
+const string& ThueBaoCoDinh::getTenDonVi() const{ return tenDonVi; }
 
-ThueBaoCaNhan::ThueBaoCaNhan(string ten, string cc, string dc, string sd) 
+ThueBaoCaNhan::ThueBaoCaNhan(const string& ten, const string& cc, const string& dc, const string& sd) 
     : ThueBaoCoDinh(ten, dc, sd), cccd(cc) {}
 
-void ThueBaoCaNhan::xuat(string maVung) const 
+void ThueBaoCaNhan::xuat(const string& maVung) const 
 {
     cout << "[Ca Nhan] ";
     ThueBaoCoDinh::xuat(maVung);
-    cout << " | CCCD: " << cccd << endl;
+    cout << " | CCCD: " << cccd << "\n";
 }
 
-string ThueBaoCaNhan::taochuoi() const { 
-    return "1|" + tenDonVi + "|" + cccd + "|" + diaChi + "|" + soDuoi; 
-}
+string ThueBaoCaNhan::taochuoi() const{ return "1|" + tenDonVi + "|" + cccd + "|" + diaChi + "|" + soDuoi; }
+int ThueBaoCaNhan::getLoai() const { return 1; }
 
+string ThueBaoDoanhNghiep::taochuoi() const{ return "2|" + tenDonVi + "|" + maSoThue + "|" + diaChi + "|" + soDuoi; }
+int ThueBaoDoanhNghiep::getLoai() const { return 2; }
 
-ThueBaoDoanhNghiep::ThueBaoDoanhNghiep(string ten, string mst, string dc, string sd) 
+ThueBaoDoanhNghiep::ThueBaoDoanhNghiep(const string& ten, const string& mst, const string& dc, const string& sd) 
     : ThueBaoCoDinh(ten, dc, sd), maSoThue(mst) {}
 
-void ThueBaoDoanhNghiep::xuat(string maVung) const 
+void ThueBaoDoanhNghiep::xuat(const string& maVung) const 
 {
     cout << "[Doanh Nghiep] ";
     ThueBaoCoDinh::xuat(maVung);
-    cout << " | MST: " << maSoThue << endl;
+    cout << " | MST: " << maSoThue << "\n";
 }
 
-string ThueBaoDoanhNghiep::taochuoi() const { 
-    return "2|" + tenDonVi + "|" + maSoThue + "|" + diaChi + "|" + soDuoi; 
-}
 
-ThueBaoCoDinh* ThueBaoCoDinh::chinhsuadata(string line) 
+
+ThueBaoCoDinh* ThueBaoCoDinh::chinhsuadata(const string& line) 
 {
     stringstream ss(line);
     string flag, ten, thongTinRieng, diaChi, soDuoi;

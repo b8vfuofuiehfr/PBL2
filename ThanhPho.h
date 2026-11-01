@@ -2,8 +2,8 @@
 #define THANHPHO_H
 
 #include "ThueBaoCoDinh.h"
+#include "Vector.h"
 #include <string>
-#include <vector>
 
 using namespace std;
 
@@ -11,27 +11,32 @@ class ThanhPho
 {
 private:
     string tenTinh;
-    string maVung; // Ma thanh pho do lop ThanhPho quan ly
-    vector<ThueBaoCoDinh*> dsThueBao;
+    string maVung;
+    Vector<ThueBaoCoDinh*> dsThueBao;
+
+    void quickSort(int low, int high, int tieuChi);
+    int partition(int low, int high, int tieuChi);
+    int binarySearchTheoSDT(const string& soDuoi);
 
 public:
-    ThanhPho(string ten);
+    ThanhPho(const string& ten);
     ~ThanhPho();
 
-    string getTenTinh() const;
-    string getMaVung() const;
-    void setMaVung(string ma);
+    const string& getTenTinh() const;
+    const string& getMaVung() const;
+    void setMaVung(const string& ma);
     string getFileName() const;
 
-    bool kiemTraTrungSDT(string soDuoi);
-    bool kiemTraTonTai(string soDuoi);  // MỚI: kiểm tra và in chi tiết
-    bool xoaThueBao(string soDuoi);     // MỚI: xóa 1 thuê bao theo số đuôi
+    bool kiemTraTrungSDT(const string& soDuoi);
+    bool kiemTraTonTai(const string& soDuoi); 
+    bool xoaThueBao(const string& soDuoi);    
     void themThueBao();
     void lietKeDanhBa();
-    int demSoLuongThueBao();
+    int demSoLuongThueBao() const;
     void xoaSoTrung();
     void docFile();
     void ghiFile();
+    void sapXepDanhBa();
 };
 
 #endif

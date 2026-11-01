@@ -19,10 +19,11 @@ int main() {
         cout << "2. Liet ke danh ba theo Tinh/Thanh Pho\n";
         cout << "3. Thong ke so luong thue bao theo Tinh/Thanh Pho\n";
         cout << "4. Hien thi cac tinh dang quan ly\n";
-        cout << "5. Kiem tra ton tai so dien thoai\n";
-        cout << "6. Xoa so dien thoai\n";
-        cout << "7. Xoa Tinh/Thanh Pho\n";
-        cout << "8. Tim va xoa so dien thoai trung\n";
+        cout << "5. Kiem tra ton tai SDT\n";
+        cout << "6. Sap xep danh ba\n";
+        cout << "7. Xoa so dien thoai\n";
+        cout << "8. Xoa Tinh/Thanh Pho\n";
+        cout << "9. Tim va xoa so dien thoai trung\n";
         cout << "0. Thoat\n";
         cout << "-----------------------------------\n";
         cout << "Lua chon cua ban: ";
@@ -73,19 +74,26 @@ int main() {
 
         case 6:
             system("cls");
-            ql.xoaThueBao();
+            ql.sapXepDanhBa();
             cout << endl;
             system("pause");
             break;
 
         case 7:
             system("cls");
-            ql.xoaTinh();
+            ql.xoaThueBao();
             cout << endl;
             system("pause");
             break;
 
         case 8:
+            system("cls");
+            ql.xoaTinh();
+            cout << endl;
+            system("pause");
+            break;
+
+        case 9:
             system("cls");
             ql.kiemTraXoaTrung();
             cout << endl;
@@ -94,7 +102,7 @@ int main() {
             
         case 0:
             system("cls");
-            cout << "\n Ket thuc chuong trinh. Chuc ban bao ve PBL2 thanh cong!\n\n";
+            cout << "\n Ket thuc chuong trinh!\n\n";
             break;
             
         default:

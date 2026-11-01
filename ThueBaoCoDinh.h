@@ -15,14 +15,18 @@ protected:
 
 public:
     ThueBaoCoDinh(); 
-    ThueBaoCoDinh(string ten, string dc, string sd);
+
+    ThueBaoCoDinh(const string& ten, const string& dc, const string& sd);
     virtual ~ThueBaoCoDinh(); 
 
-    virtual void xuat(string maVung = "") const; 
+    virtual void xuat(const string& maVung = "") const; 
     virtual string taochuoi() const = 0; 
-    string getSoDuoi() const; 
+    virtual int getLoai() const = 0;
+    
+    const string& getSoDuoi() const; 
+    const string& getTenDonVi() const;
 
-    static ThueBaoCoDinh* chinhsuadata(string line);
+    static ThueBaoCoDinh* chinhsuadata(const string& line);
 };
 
 class ThueBaoCaNhan : public ThueBaoCoDinh 
@@ -30,9 +34,10 @@ class ThueBaoCaNhan : public ThueBaoCoDinh
 private:
     string cccd; 
 public:
-    ThueBaoCaNhan(string ten, string cc, string dc, string sd);
-    void xuat(string maVung = "") const override;
+    ThueBaoCaNhan(const string& ten, const string& cc, const string& dc, const string& sd);
+    void xuat(const string& maVung = "") const override;
     string taochuoi() const override;
+    int getLoai() const override;
 };
 
 class ThueBaoDoanhNghiep : public ThueBaoCoDinh 
@@ -40,9 +45,10 @@ class ThueBaoDoanhNghiep : public ThueBaoCoDinh
 private:
     string maSoThue; 
 public:
-    ThueBaoDoanhNghiep(string ten, string mst, string dc, string sd);
-    void xuat(string maVung = "") const override;
+    ThueBaoDoanhNghiep(const string& ten, const string& mst, const string& dc, const string& sd);
+    void xuat(const string& maVung = "") const override;
     string taochuoi() const override;
+    int getLoai() const override;
 };
 
 #endif

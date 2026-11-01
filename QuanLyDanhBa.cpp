@@ -2,7 +2,7 @@
 #include "ThanhPho.h"
 #include <iostream>
 #include <fstream>
-#include <cstdio> // Dung ham remove() de xoa file
+#include <cstdio>
 
 using namespace std;
 
@@ -25,22 +25,22 @@ void QuanLyDanhBa::capNhatFileDanhSachTinh()
 {
     ofstream file("data/0_DanhSachTinh.dat");
     if (!file) return;
-    for (size_t i = 0; i < dsTinh.size(); i++){
-        file << dsTinh[i] << endl;
+    for (int i = 0; i < dsTinh.size(); i++){
+        file << dsTinh[i] << "\n";
     }
     file.close();
 }
 
-void QuanLyDanhBa::themTinh(string tinh) 
+void QuanLyDanhBa::themTinh(const string& tinh) 
 {
-    for (string x : dsTinh) 
+    for (const string& x : dsTinh) 
         if (x == tinh) return;
 
     dsTinh.push_back(tinh);
 
     ofstream fileMucLuc("data/0_DanhSachTinh.dat", ios::app);
     if (fileMucLuc){
-        fileMucLuc << tinh << endl;
+        fileMucLuc << tinh << "\n";
         fileMucLuc.close();
     }
 }
@@ -76,11 +76,11 @@ void QuanLyDanhBa::thongKeTheoTinh()
         return;
     }
 
-    for (string tinh : dsTinh){
+    for (const string& tinh : dsTinh){
         ThanhPho tp(tinh);
         cout << tinh << " (Ma vung: " << tp.getMaVung() << ") : "
              << tp.demSoLuongThueBao()
-             << " thue bao" << endl;
+             << " thue bao\n";
     }
 }
 
@@ -93,7 +93,7 @@ void QuanLyDanhBa::hienThiTinh()
         return;
     }
 
-    for (string tinh : dsTinh){
+    for (const string& tinh : dsTinh){
         ThanhPho tp(tinh);
         cout << "- " << tinh << " [Ma vung: " << tp.getMaVung() << "]\n";
     }
@@ -109,7 +109,6 @@ void QuanLyDanhBa::kiemTraXoaTrung()
     tp.xoaSoTrung();
 }
 
-// ===== MỚI: KIỂM TRA TỒN TẠI SỐ ĐIỆN THOẠI =====
 void QuanLyDanhBa::kiemTraTonTaiSDT() 
 {
     string tinh, soDuoi;
@@ -117,7 +116,7 @@ void QuanLyDanhBa::kiemTraTonTaiSDT()
     cin >> tinh;
 
     bool tonTaiTinh = false;
-    for (string x : dsTinh) {
+    for (const string& x : dsTinh) {
         if (x == tinh) { tonTaiTinh = true; break; }
     }
 
@@ -133,7 +132,26 @@ void QuanLyDanhBa::kiemTraTonTaiSDT()
     tp.kiemTraTonTai(soDuoi);
 }
 
-// ===== MỚI: XÓA SỐ ĐIỆN THOẠI =====
+void QuanLyDanhBa::sapXepDanhBa() 
+{
+    string tinh;
+    cout << "Nhap tinh can sap xep danh ba: ";
+    cin >> tinh;
+
+    bool tonTaiTinh = false;
+    for (const string& x : dsTinh) {
+        if (x == tinh) { tonTaiTinh = true; break; }
+    }
+
+    if (!tonTaiTinh) {
+        cout << "[-] Tinh " << tinh << " khong co trong he thong!\n";
+        return;
+    }
+
+    ThanhPho tp(tinh);
+    tp.sapXepDanhBa();
+}
+
 void QuanLyDanhBa::xoaThueBao() 
 {
     string tinh, soDuoi;
@@ -141,7 +159,7 @@ void QuanLyDanhBa::xoaThueBao()
     cin >> tinh;
 
     bool tonTaiTinh = false;
-    for (string x : dsTinh){
+    for (const string& x : dsTinh){
         if (x == tinh) {tonTaiTinh = true; break;}
     }
 
@@ -157,7 +175,6 @@ void QuanLyDanhBa::xoaThueBao()
     tp.xoaThueBao(soDuoi);
 }
 
-// ===== MỚI: XÓA TỈNH =====
 void QuanLyDanhBa::xoaTinh() 
 {
     string tinh;
@@ -165,7 +182,7 @@ void QuanLyDanhBa::xoaTinh()
     cin >> tinh;
 
     int viTri = -1;
-    for (size_t i = 0; i < dsTinh.size(); i++){
+    for (int i = 0; i < dsTinh.size(); i++){
         if (dsTinh[i] == tinh) {
             viTri = i;
             break;
@@ -177,7 +194,7 @@ void QuanLyDanhBa::xoaTinh()
         return;
     }
 
-    cout << "[CANDIDATE] Ban co chac muon xoa tinh " << tinh << " va toan bo du lieu lien quan? (y/n): ";
+    cout << "[CANH BAO] Ban co chac muon xoa tinh " << tinh << " va toan bo du lieu lien quan? (y/n): ";
     char xacNhan;
     cin >> xacNhan;
 
@@ -186,8 +203,7 @@ void QuanLyDanhBa::xoaTinh()
         return;
     }
 
-    dsTinh.erase(dsTinh.begin() + viTri);
-
+    dsTinh.erase(viTri);
     capNhatFileDanhSachTinh();
 
     string duongDan = "data/" + tinh + ".dat";
