@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-    QuanLyDanhBa ql;
+    QuanLyDanhBa& ql = QuanLyDanhBa::getInstance(); 
     int chon;
 
     do {

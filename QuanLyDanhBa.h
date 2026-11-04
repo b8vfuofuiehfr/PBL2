@@ -11,10 +11,17 @@ class QuanLyDanhBa
 private:
     Vector<string> dsTinh;
     void capNhatFileDanhSachTinh();
-
-public:
     QuanLyDanhBa();
     ~QuanLyDanhBa();
+
+public:
+    QuanLyDanhBa(const QuanLyDanhBa&) = delete;
+    QuanLyDanhBa& operator=(const QuanLyDanhBa&) = delete;
+
+    static QuanLyDanhBa& getInstance(){
+        static QuanLyDanhBa instance;
+        return instance;
+    }
     void themTinh(const string& tinh); 
     void themThueBao();
     void lietKeTheoTinh();

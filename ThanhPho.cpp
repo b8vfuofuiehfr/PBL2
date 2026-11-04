@@ -7,10 +7,7 @@
 using namespace std;
 
 ThanhPho::ThanhPho(const string& ten) 
-    : tenTinh(ten), maVung("") 
-{
-    docFile();   
-}
+    : tenTinh(ten), maVung(""){ docFile(); }
 
 ThanhPho::~ThanhPho()
 {
