@@ -41,8 +41,9 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "MainWindow",
-        "onChonTinh",
+        "onDangXuat",
         "",
+        "onChonTinh",
         "index",
         "onThemTinh",
         "onXoaTinh",
@@ -55,26 +56,28 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Slot 'onDangXuat'
+        QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'onChonTinh'
-        QtMocHelpers::SlotData<void(int)>(1, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::Int, 3 },
+        QtMocHelpers::SlotData<void(int)>(3, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 4 },
         }}),
         // Slot 'onThemTinh'
-        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onXoaTinh'
         QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onThemThueBao'
+        // Slot 'onXoaTinh'
         QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onSuaThueBao'
+        // Slot 'onThemThueBao'
         QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onXoaThueBao'
+        // Slot 'onSuaThueBao'
         QtMocHelpers::SlotData<void()>(8, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onTimKiem'
+        // Slot 'onXoaThueBao'
         QtMocHelpers::SlotData<void()>(9, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onSapXep'
+        // Slot 'onTimKiem'
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onXoaTrung'
+        // Slot 'onSapXep'
         QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onXoaTrung'
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -98,15 +101,16 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     auto *_t = static_cast<MainWindow *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->onChonTinh((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
-        case 1: _t->onThemTinh(); break;
-        case 2: _t->onXoaTinh(); break;
-        case 3: _t->onThemThueBao(); break;
-        case 4: _t->onSuaThueBao(); break;
-        case 5: _t->onXoaThueBao(); break;
-        case 6: _t->onTimKiem(); break;
-        case 7: _t->onSapXep(); break;
-        case 8: _t->onXoaTrung(); break;
+        case 0: _t->onDangXuat(); break;
+        case 1: _t->onChonTinh((*reinterpret_cast<std::add_pointer_t<int>>(_a[1]))); break;
+        case 2: _t->onThemTinh(); break;
+        case 3: _t->onXoaTinh(); break;
+        case 4: _t->onThemThueBao(); break;
+        case 5: _t->onSuaThueBao(); break;
+        case 6: _t->onXoaThueBao(); break;
+        case 7: _t->onTimKiem(); break;
+        case 8: _t->onSapXep(); break;
+        case 9: _t->onXoaTrung(); break;
         default: ;
         }
     }
@@ -131,14 +135,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 10)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }

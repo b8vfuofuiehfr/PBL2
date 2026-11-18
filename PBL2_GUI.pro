@@ -1,17 +1,28 @@
-QT       += core gui widgets
+QT += core gui widgets
 
-CONFIG += c++11
+CONFIG += c++17
 
-SOURCES += \
-    main.cpp \
-    mainwindow.cpp \
-    QuanLyDanhBa.cpp \
-    ThanhPho.cpp \
-    ThueBaoCoDinh.cpp
+INCLUDEPATH += $$PWD/src \
+               $$PWD/src/core \
+               $$PWD/src/models \
+               $$PWD/src/ui
 
 HEADERS += \
-    mainwindow.h \
-    Vector.h \
-    ThueBaoCoDinh.h \
-    ThanhPho.h \
-    QuanLyDanhBa.h
+    src/core/Vector.h \
+    src/models/ThueBaoCoDinh.h \
+    src/models/ThanhPho.h \
+    src/models/QuanLyDanhBa.h \
+    src/models/NguoiDung.h \
+    src/ui/LoginDialog.h \
+    src/ui/RegisterDialog.h \
+    src/ui/DanhBaWindow.h
+
+SOURCES += \
+    src/main.cpp \
+    src/models/ThueBaoCoDinh.cpp \
+    src/models/ThanhPho.cpp \
+    src/models/QuanLyDanhBa.cpp \
+    src/models/NguoiDung.cpp \
+    src/ui/LoginDialog.cpp \
+    src/ui/RegisterDialog.cpp \
+    src/ui/DanhBaWindow.cpp

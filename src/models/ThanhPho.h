@@ -24,6 +24,9 @@ public:
 
     const string& getTenTinh() const { return tenTinh; }
     const string& getMaVung() const { return maVung; }
+    int getTongThueBao() const { return dsThueBao.size(); }
+    int getSoCaNhan() const;
+    int getSoDoanhNghiep() const;
     void setMaVung(const string& ma) { maVung = ma; }
     Vector<ThueBaoCoDinh*>& getDanhSachThueBao() { return dsThueBao; }
 

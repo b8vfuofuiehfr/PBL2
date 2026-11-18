@@ -149,10 +149,18 @@ bool ThanhPho::themThueBao(ThueBaoCoDinh* tb)
 bool ThanhPho::suaThueBao(int index, const string& ten, const string& dd, const string& dc, const string& sd)
 {
     if (index < 0 || index >= dsThueBao.size()) return false;
-    dsThueBao[index]->setTenDonVi(ten);
-    dsThueBao[index]->setDinhDanh(dd);
-    dsThueBao[index]->setDiaChi(dc);
-    dsThueBao[index]->setSoDuoi(sd);
+
+    // Luu lai con tro cua dung thue bao dang chon truoc khi kiemTraTrungSDT goi quickSort
+    ThueBaoCoDinh* target = dsThueBao[index];
+
+    if (sd != target->getSoDuoi() && kiemTraTrungSDT(sd)) {
+        return false; // So dien thoai moi bi trung
+    }
+
+    target->setTenDonVi(ten);
+    target->setDinhDanh(dd);
+    target->setDiaChi(dc);
+    target->setSoDuoi(sd);
     ghiFile();
     return true;
 }
@@ -193,4 +201,22 @@ void ThanhPho::sapXepDanhBa(int tieuChi)
     if (dsThueBao.empty()) return;
     quickSort(0, dsThueBao.size() - 1, tieuChi);
     ghiFile();
+}
+
+int ThanhPho::getSoCaNhan() const
+{
+    int dem = 0;
+    for (int i = 0; i < dsThueBao.size(); i++) {
+        if (dsThueBao[i]->getLoai() == 1) dem++;
+    }
+    return dem;
+}
+
+int ThanhPho::getSoDoanhNghiep() const
+{
+    int dem = 0;
+    for (int i = 0; i < dsThueBao.size(); i++) {
+        if (dsThueBao[i]->getLoai() == 2) dem++;
+    }
+    return dem;
 }
